@@ -9,6 +9,8 @@ import { AuthService } from './services/auth.service';
 
 import { HttpModule } from '@angular/http';
 
+import { AgmCoreModule } from '@agm/core';
+
 
 const appRoutes: Routes = [
   {path:'', component: DashboardComponent}
@@ -22,7 +24,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB5Xxm-YfbJVtmkWIPbDcIIQbBLRwMkKf4'
+    })
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

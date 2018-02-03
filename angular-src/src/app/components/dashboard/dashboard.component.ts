@@ -10,11 +10,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+
   constructor( private authService: AuthService ) { }
 
   ngOnInit() {
     console.log("test");
-    
+   
+
     this.authService.getMapData().subscribe(data => {
       console.log(data);
     });
