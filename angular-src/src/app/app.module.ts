@@ -11,6 +11,8 @@ import { HttpModule } from '@angular/http';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { ChartsModule } from 'ng2-charts';
+
 
 const appRoutes: Routes = [
   {path:'', component: DashboardComponent}
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB5Xxm-YfbJVtmkWIPbDcIIQbBLRwMkKf4'
-    })
+    }),
+    ChartsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
