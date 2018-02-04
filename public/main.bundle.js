@@ -156,7 +156,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  dashboard works!\n  \n</p>\n\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\">\n      <agm-marker *ngFor=\"let m of biomass; let i = index\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n  </agm-map> \n\n\n\n  <!-- <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\"></canvas>\n      </div>\n      <button (click)=\"randomize()\">Update</button>\n    </div> -->\n"
+module.exports = "<p>\n  dashboard works!\n  \n</p>\n\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\" [zoom] = 16>\n      <agm-marker *ngFor=\"let m of biomass; let i = index\"\n      [iconUrl] = \"'https://png.icons8.com/color/2x/thermometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of gas_waste; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/rain-gauge.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydro; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/hygrometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydro_waste; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/dew-point.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of solar; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/summer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of wind; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/windy-weather.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n  </agm-map> \n\n  <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\">\n        </canvas>\n      </div>\n  </div>\n\n\n  <div style=\"display: block\">\n      <canvas baseChart\n              [data]=\"pieChartData\"\n              [labels]=\"pieChartLabels\"\n              [chartType]=\"pieChartType\"\n              (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n    </div>\n"
 
 /***/ }),
 
@@ -182,21 +182,37 @@ var DashboardComponent = (function () {
     function DashboardComponent(authService) {
         var _this = this;
         this.authService = authService;
-        this.lat = 51.678418;
-        this.lng = 7.809007;
+        //test : Test[];
+        //*********** */
+        this.barChartOptions = {
+            scaleShowVerticalLines: false,
+            responsive: true
+        };
+        this.barChartLabels = ['Biomass', 'Hydro', 'Hydro Waste', 'Solar', 'Wind', 'Gas Waste'];
+        this.barChartType = 'bar';
+        this.barChartLegend = true;
+        this.pieChartLabels = ['Biomass', 'Hydro', 'Hydro Waste', 'Solar', 'Wind', 'Gas Waste'];
+        this.pieChartData = [4, 1, 221, 3, 981, 176];
+        this.pieChartType = 'pie';
+        this.lat = 42.13619;
+        this.lng = 24.52028;
+        this.icon = 'wind.png';
         this.authService.getMapData().subscribe(function (data) {
             console.log(data);
-            _this.biomass = data.data.wind;
+            _this.biomass = data.data.biomas;
+            _this.gas_waste = data.data.gas_waste;
+            _this.hydro = data.data.hydro;
+            _this.hydro_waste = data.data.hydro_waste;
+            _this.solar = data.data.solar;
+            _this.wind = data.data.wind;
+            _this.biomassLength = _this.biomass.length;
         });
+        this.barChartData = [
+            { data: [4, 1, 221, 3, 981, 176], label: 'Series A' }
+        ];
     }
-    // biomas = [{
-    //   lat : 51.678418,
-    //   lng : 7.809007},
-    //   {
-    //     lat : 43.48800,
-    //     lng : 28.41156},
-    // ];
     DashboardComponent.prototype.ngOnInit = function () {
+        console.log(this.biomassLength);
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

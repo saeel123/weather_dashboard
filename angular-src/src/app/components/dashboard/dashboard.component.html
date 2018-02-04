@@ -3,16 +3,46 @@
   
 </p>
 
-  <agm-map [latitude]="lat" [longitude]="lng">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom] = 16>
       <agm-marker *ngFor="let m of biomass; let i = index"
+      [iconUrl] = "'https://png.icons8.com/color/2x/thermometer.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
+
+      <agm-marker *ngFor="let m of gas_waste; let i = index"
+      [iconUrl]="'https://png.icons8.com/color/2x/rain-gauge.png'"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [markerDraggable]="m.draggable"></agm-marker>
+
+      <agm-marker *ngFor="let m of hydro; let i = index"
+      [iconUrl]="'https://png.icons8.com/color/2x/hygrometer.png'"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [markerDraggable]="m.draggable"></agm-marker>
+
+      <agm-marker *ngFor="let m of hydro_waste; let i = index"
+      [iconUrl]="'https://png.icons8.com/color/2x/dew-point.png'"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [markerDraggable]="m.draggable"></agm-marker>
+
+      <agm-marker *ngFor="let m of solar; let i = index"
+      [iconUrl]="'https://png.icons8.com/color/2x/summer.png'"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [markerDraggable]="m.draggable"></agm-marker>
+
+      <agm-marker *ngFor="let m of wind; let i = index"
+      [iconUrl]="'https://png.icons8.com/color/2x/windy-weather.png'"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [markerDraggable]="m.draggable"></agm-marker>
+
   </agm-map> 
 
-
-
-  <!-- <div>
+  <div>
       <div style="display: block">
         <canvas baseChart
                 [datasets]="barChartData"
@@ -21,7 +51,17 @@
                 [legend]="barChartLegend"
                 [chartType]="barChartType"
                 (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+                (chartClick)="chartClicked($event)">
+        </canvas>
       </div>
-      <button (click)="randomize()">Update</button>
-    </div> -->
+  </div>
+
+
+  <div style="display: block">
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>

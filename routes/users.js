@@ -56,7 +56,8 @@ router.get('/register', (req, res, next) => {
         var finalData = {
             wind : wind,
             solar : solar,
-            hydro : gas_waste,
+            hydro : hydro,
+            gas_waste : gas_waste,            
             biomas : biomas,
             hydro_waste: hydro_waste
         }
