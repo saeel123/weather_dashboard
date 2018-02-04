@@ -156,7 +156,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  dashboard works!\n</p>\n\n<agm-map [latitude]=\"lat\" [longitude]=\"lng\">\n    <agm-marker [latitude]=\"lat\" [longitude]=\"lng\"></agm-marker>\n  </agm-map>\n\n  <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\"></canvas>\n      </div>\n      <button (click)=\"randomize()\">Update</button>\n    </div>\n"
+module.exports = "<p>\n  dashboard works!\n  \n</p>\n\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\">\n      <agm-marker *ngFor=\"let m of biomass; let i = index\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n  </agm-map> \n\n\n\n  <!-- <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\"></canvas>\n      </div>\n      <button (click)=\"randomize()\">Update</button>\n    </div> -->\n"
 
 /***/ }),
 
@@ -180,54 +180,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DashboardComponent = (function () {
     function DashboardComponent(authService) {
+        var _this = this;
         this.authService = authService;
         this.lat = 51.678418;
         this.lng = 7.809007;
-        this.barChartOptions = {
-            scaleShowVerticalLines: false,
-            responsive: true
-        };
-        this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-        this.barChartType = 'bar';
-        this.barChartLegend = true;
-        this.barChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-        ];
-    }
-    // events
-    DashboardComponent.prototype.chartClicked = function (e) {
-        console.log(e);
-    };
-    DashboardComponent.prototype.chartHovered = function (e) {
-        console.log(e);
-    };
-    DashboardComponent.prototype.randomize = function () {
-        // Only Change 3 values
-        var data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            (Math.random() * 100),
-            56,
-            (Math.random() * 100),
-            40
-        ];
-        var clone = JSON.parse(JSON.stringify(this.barChartData));
-        clone[0].data = data;
-        this.barChartData = clone;
-        /**
-         * (My guess), for Angular to recognize the change in the dataset
-         * it has to change the dataset variable directly,
-         * so one way around it, is to clone the data, change it and then
-         * assign it;
-         */
-    };
-    DashboardComponent.prototype.ngOnInit = function () {
-        console.log("test");
         this.authService.getMapData().subscribe(function (data) {
             console.log(data);
+            _this.biomass = data.data.wind;
         });
+    }
+    // biomas = [{
+    //   lat : 51.678418,
+    //   lng : 7.809007},
+    //   {
+    //     lat : 43.48800,
+    //     lng : 28.41156},
+    // ];
+    DashboardComponent.prototype.ngOnInit = function () {
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

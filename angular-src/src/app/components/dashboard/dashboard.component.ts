@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AuthService } from '../../services/auth.service';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -10,64 +8,36 @@ import { AuthService } from '../../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  biomass: Biomass[];
+
   lat: number = 51.678418;
   lng: number = 7.809007;
-
-
-  public barChartOptions:any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = true;
- 
-  public barChartData:any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
- 
-  public randomize():void {
-    // Only Change 3 values
-    let data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
-  }
-
-  constructor( private authService: AuthService ) { }
-
-  ngOnInit() {
-    console.log("test");
-   
-
+  
+  constructor( private authService: AuthService ) { 
     this.authService.getMapData().subscribe(data => {
       console.log(data);
+      
+
+      this.biomass = data.data.wind;
     });
   }
 
+  // biomas = [{
+  //   lat : 51.678418,
+  //   lng : 7.809007},
+  //   {
+  //     lat : 43.48800,
+  //     lng : 28.41156},
+  // ];
   
+  ngOnInit() {
+     
+  }
 
+}
+
+interface Biomass {
+  type: string;
+  lat: number;
+  lng: number;
 }
