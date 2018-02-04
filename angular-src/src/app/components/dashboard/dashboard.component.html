@@ -1,40 +1,46 @@
 <p>
-  dashboard works!
-  
+    <button (click)="allData()">All</button>
+    <button (click)="biomassData()">Biomass</button>
+    <button (click)="gasData()">Gas Waste</button>
+    <button (click)="hydroData()">Hydro</button>
+    <button (click)="hydroWData()">Hydro Waste</button>
+    <button (click)="solarData()">Solar</button>
+    <button (click)="windData()">Wind</button>        
 </p>
 
   <agm-map [latitude]="lat" [longitude]="lng" [zoom] = 16>
-      <agm-marker *ngFor="let m of biomass; let i = index"
+      <agm-marker *ngFor="let m of biomassc; let i = index"
       [iconUrl] = "'https://png.icons8.com/color/2x/thermometer.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of gas_waste; let i = index"
+      <agm-marker *ngFor="let m of gas_wastec; let i = index"
       [iconUrl]="'https://png.icons8.com/color/2x/rain-gauge.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of hydro; let i = index"
+      <agm-marker *ngFor="let m of hydroc; let i = index"
       [iconUrl]="'https://png.icons8.com/color/2x/hygrometer.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of hydro_waste; let i = index"
+      <agm-marker *ngFor="let m of hydro_wastec; let i = index"
       [iconUrl]="'https://png.icons8.com/color/2x/dew-point.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of solar; let i = index"
+      <agm-marker
+      *ngFor="let m of solarc; let i = index"
       [iconUrl]="'https://png.icons8.com/color/2x/summer.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"
       [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of wind; let i = index"
+      <agm-marker *ngFor="let m of windc; let i = index"
       [iconUrl]="'https://png.icons8.com/color/2x/windy-weather.png'"
       [latitude]="m.lat"
       [longitude]="m.lng"

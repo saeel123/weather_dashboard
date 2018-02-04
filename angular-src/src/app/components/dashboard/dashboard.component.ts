@@ -15,7 +15,18 @@ export class DashboardComponent implements OnInit {
   wind: Wind[];
   gas_waste: Gas_waste[];
 
+
+  biomassc: Biomass[];
+  hydroc: Hydro[];
+  hydro_wastec: Hydro_waste[];
+  solarc: Solar[];
+  windc: Wind[];
+  gas_wastec: Gas_waste[];
+
+
   biomassLength: number;
+
+  showHobbies: boolean = true;
   
 
   //test : Test[];
@@ -42,7 +53,7 @@ export class DashboardComponent implements OnInit {
 
   icon : string = 'wind.png';
   
-  constructor( private authService: AuthService ) { 
+  constructor( private authService: AuthService ) {
     this.authService.getMapData().subscribe(data => {
       console.log(data);
       this.biomass = data.data.biomas;
@@ -51,13 +62,81 @@ export class DashboardComponent implements OnInit {
       this.hydro_waste = data.data.hydro_waste;
       this.solar = data.data.solar;
       this.wind = data.data.wind;
-      
+  
       this.biomassLength =  this.biomass.length;
+
+      this.biomassc = data.data.biomas;
+      this.gas_wastec = data.data.gas_waste;
+      this.hydroc = data.data.hydro;
+      this.hydro_wastec = data.data.hydro_waste;
+      this.solarc = data.data.solar;
+      this.windc = data.data.wind;
+
+
     });
 
     this.barChartData = [
       { data: [4, 1, 221, 3, 981, 176], label: 'Series A'}
-    ]; 
+    ];
+  ;
+  }
+
+  biomassData() {
+      this.biomassc = this.biomass;
+      this.gas_wastec = [];
+      this.hydroc = [];
+      this.hydro_wastec = [];
+      this.solarc = [];
+      this.windc = [];
+  }
+  gasData() {
+      this.biomassc = [];
+      this.gas_wastec = this.gas_waste;
+      this.hydroc = [];
+      this.hydro_wastec = [];
+      this.solarc = [];
+      this.windc = [];
+  }
+  hydroData() {
+      this.biomassc = [];
+      this.gas_wastec = [];
+      this.hydroc = this.hydro;
+      this.hydro_wastec = [];
+      this.solarc = [];
+      this.windc = [];
+  }
+  hydroWData() {
+      this.biomassc = [];
+      this.gas_wastec = [];
+      this.hydroc = [];
+      this.hydro_wastec = this.hydro_waste;
+      this.solarc = [];
+      this.windc = [];
+  }
+  solarData() {
+      this.biomassc = [];
+      this.gas_wastec = [];
+      this.hydroc = [];
+      this.hydro_wastec = [];
+      this.solarc = this.solar;
+      this.windc = [];
+  }
+  windData() {
+      this.biomassc = [];
+      this.gas_wastec = [];
+      this.hydroc = [];
+      this.hydro_wastec = [];
+      this.solarc = [];
+      this.windc = this.wind;
+  }
+
+  allData() {
+    this.biomassc = this.biomass;
+    this.gas_wastec = this.gas_waste ;
+    this.hydroc = this.hydro;
+    this.hydro_wastec = this.hydro_waste;
+    this.solarc = this.solar;
+    this.windc = this.wind;
   }
 
 

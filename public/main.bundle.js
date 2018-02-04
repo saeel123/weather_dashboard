@@ -156,7 +156,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  dashboard works!\n  \n</p>\n\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\" [zoom] = 16>\n      <agm-marker *ngFor=\"let m of biomass; let i = index\"\n      [iconUrl] = \"'https://png.icons8.com/color/2x/thermometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of gas_waste; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/rain-gauge.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydro; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/hygrometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydro_waste; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/dew-point.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of solar; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/summer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of wind; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/windy-weather.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n  </agm-map> \n\n  <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\">\n        </canvas>\n      </div>\n  </div>\n\n\n  <div style=\"display: block\">\n      <canvas baseChart\n              [data]=\"pieChartData\"\n              [labels]=\"pieChartLabels\"\n              [chartType]=\"pieChartType\"\n              (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n    </div>\n"
+module.exports = "<p>\n    <button (click)=\"allData()\">All</button>\n    <button (click)=\"biomassData()\">Biomass</button>\n    <button (click)=\"gasData()\">Gas Waste</button>\n    <button (click)=\"hydroData()\">Hydro</button>\n    <button (click)=\"hydroWData()\">Hydro Waste</button>\n    <button (click)=\"solarData()\">Solar</button>\n    <button (click)=\"windData()\">Wind</button>        \n</p>\n\n  <agm-map [latitude]=\"lat\" [longitude]=\"lng\" [zoom] = 16>\n      <agm-marker *ngFor=\"let m of biomassc; let i = index\"\n      [iconUrl] = \"'https://png.icons8.com/color/2x/thermometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of gas_wastec; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/rain-gauge.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydroc; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/hygrometer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of hydro_wastec; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/dew-point.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker\n      *ngFor=\"let m of solarc; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/summer.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n      <agm-marker *ngFor=\"let m of windc; let i = index\"\n      [iconUrl]=\"'https://png.icons8.com/color/2x/windy-weather.png'\"\n      [latitude]=\"m.lat\"\n      [longitude]=\"m.lng\"\n      [markerDraggable]=\"m.draggable\"></agm-marker>\n\n  </agm-map> \n\n  <div>\n      <div style=\"display: block\">\n        <canvas baseChart\n                [datasets]=\"barChartData\"\n                [labels]=\"barChartLabels\"\n                [options]=\"barChartOptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"barChartType\"\n                (chartHover)=\"chartHovered($event)\"\n                (chartClick)=\"chartClicked($event)\">\n        </canvas>\n      </div>\n  </div>\n\n\n  <div style=\"display: block\">\n      <canvas baseChart\n              [data]=\"pieChartData\"\n              [labels]=\"pieChartLabels\"\n              [chartType]=\"pieChartType\"\n              (chartHover)=\"chartHovered($event)\"\n              (chartClick)=\"chartClicked($event)\"></canvas>\n    </div>\n"
 
 /***/ }),
 
@@ -182,6 +182,7 @@ var DashboardComponent = (function () {
     function DashboardComponent(authService) {
         var _this = this;
         this.authService = authService;
+        this.showHobbies = true;
         //test : Test[];
         //*********** */
         this.barChartOptions = {
@@ -206,11 +207,74 @@ var DashboardComponent = (function () {
             _this.solar = data.data.solar;
             _this.wind = data.data.wind;
             _this.biomassLength = _this.biomass.length;
+            _this.biomassc = data.data.biomas;
+            _this.gas_wastec = data.data.gas_waste;
+            _this.hydroc = data.data.hydro;
+            _this.hydro_wastec = data.data.hydro_waste;
+            _this.solarc = data.data.solar;
+            _this.windc = data.data.wind;
         });
         this.barChartData = [
             { data: [4, 1, 221, 3, 981, 176], label: 'Series A' }
         ];
+        ;
     }
+    DashboardComponent.prototype.biomassData = function () {
+        this.biomassc = this.biomass;
+        this.gas_wastec = [];
+        this.hydroc = [];
+        this.hydro_wastec = [];
+        this.solarc = [];
+        this.windc = [];
+    };
+    DashboardComponent.prototype.gasData = function () {
+        this.biomassc = [];
+        this.gas_wastec = this.gas_waste;
+        this.hydroc = [];
+        this.hydro_wastec = [];
+        this.solarc = [];
+        this.windc = [];
+    };
+    DashboardComponent.prototype.hydroData = function () {
+        this.biomassc = [];
+        this.gas_wastec = [];
+        this.hydroc = this.hydro;
+        this.hydro_wastec = [];
+        this.solarc = [];
+        this.windc = [];
+    };
+    DashboardComponent.prototype.hydroWData = function () {
+        this.biomassc = [];
+        this.gas_wastec = [];
+        this.hydroc = [];
+        this.hydro_wastec = this.hydro_waste;
+        this.solarc = [];
+        this.windc = [];
+    };
+    DashboardComponent.prototype.solarData = function () {
+        this.biomassc = [];
+        this.gas_wastec = [];
+        this.hydroc = [];
+        this.hydro_wastec = [];
+        this.solarc = this.solar;
+        this.windc = [];
+    };
+    DashboardComponent.prototype.windData = function () {
+        this.biomassc = [];
+        this.gas_wastec = [];
+        this.hydroc = [];
+        this.hydro_wastec = [];
+        this.solarc = [];
+        this.windc = this.wind;
+    };
+    DashboardComponent.prototype.allData = function () {
+        this.biomassc = this.biomass;
+        this.gas_wastec = this.gas_waste;
+        this.hydroc = this.hydro;
+        this.hydro_wastec = this.hydro_waste;
+        this.solarc = this.solar;
+        this.windc = this.wind;
+    };
     DashboardComponent.prototype.ngOnInit = function () {
         console.log(this.biomassLength);
     };
