@@ -1,73 +1,83 @@
-<p>
-    <button (click)="allData()">All</button>
-    <button (click)="biomassData()">Biomass</button>
-    <button (click)="gasData()">Gas Waste</button>
-    <button (click)="hydroData()">Hydro</button>
-    <button (click)="hydroWData()">Hydro Waste</button>
-    <button (click)="solarData()">Solar</button>
-    <button (click)="windData()">Wind</button>        
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="text-center">Weather Dashboard</h2>
+        <div class="col-sm-offset-3 col-sm-6 text-center">
+        <div class=" btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default"  (click)="allData()">All</button>
+            <button type="button" class="btn btn-default" (click)="biomassData()">Biomass</button>
+            <button type="button" class="btn btn-default" (click)="gasData()">Gas Waste</button>
+            <button type="button" class="btn btn-default" (click)="hydroData()">Hydro</button>
+            <button type="button" class="btn btn-default" (click)="hydroWData()">Hydro Waste</button>
+            <button type="button" class="btn btn-default" (click)="solarData()">Solar</button>
+            <button type="button" class="btn btn-default" (click)="windData()">Wind</button> 
+        </div>
+       </div>
 
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom] = 16>
-      <agm-marker *ngFor="let m of biomassc; let i = index"
-      [iconUrl] = "'https://png.icons8.com/color/2x/thermometer.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+       <div class="col-md-12 text-center">
 
-      <agm-marker *ngFor="let m of gas_wastec; let i = index"
-      [iconUrl]="'https://png.icons8.com/color/2x/rain-gauge.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom] = 10>
+            <agm-marker *ngFor="let m of biomassc; let i = index"
+            [iconUrl] = "'https://png.icons8.com/color/2x/thermometer.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of hydroc; let i = index"
-      [iconUrl]="'https://png.icons8.com/color/2x/hygrometer.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+            <agm-marker *ngFor="let m of gas_wastec; let i = index"
+            [iconUrl]="'https://png.icons8.com/color/2x/rain-gauge.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of hydro_wastec; let i = index"
-      [iconUrl]="'https://png.icons8.com/color/2x/dew-point.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+            <agm-marker *ngFor="let m of hydroc; let i = index"
+            [iconUrl]="'https://png.icons8.com/color/2x/hygrometer.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker
-      *ngFor="let m of solarc; let i = index"
-      [iconUrl]="'https://png.icons8.com/color/2x/summer.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+            <agm-marker *ngFor="let m of hydro_wastec; let i = index"
+            [iconUrl]="'https://png.icons8.com/color/2x/dew-point.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-      <agm-marker *ngFor="let m of windc; let i = index"
-      [iconUrl]="'https://png.icons8.com/color/2x/windy-weather.png'"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [markerDraggable]="m.draggable"></agm-marker>
+            <agm-marker
+            *ngFor="let m of solarc; let i = index"
+            [iconUrl]="'https://png.icons8.com/color/2x/summer.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-  </agm-map> 
+            <agm-marker *ngFor="let m of windc; let i = index"
+            [iconUrl]="'https://png.icons8.com/color/2x/windy-weather.png'"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [markerDraggable]="m.draggable"></agm-marker>
 
-  <div>
-      <div style="display: block">
-        <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
-        </canvas>
-      </div>
+        </agm-map> 
+        </div>
+ 
+        <div>
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+              </canvas>
+            </div>
+        </div>
+
+        <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
   </div>
-
-
-  <div style="display: block">
-      <canvas baseChart
-              [data]="pieChartData"
-              [labels]="pieChartLabels"
-              [chartType]="pieChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-    </div>
+</div>

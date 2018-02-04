@@ -23,18 +23,6 @@ export class DashboardComponent implements OnInit {
   windc: Wind[];
   gas_wastec: Gas_waste[];
 
-
-  biomassLength: number;
-
-  showHobbies: boolean = true;
-  
-
-  //test : Test[];
-
-
-  //*********** */
-
-
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -63,7 +51,6 @@ export class DashboardComponent implements OnInit {
       this.solar = data.data.solar;
       this.wind = data.data.wind;
   
-      this.biomassLength =  this.biomass.length;
 
       this.biomassc = data.data.biomas;
       this.gas_wastec = data.data.gas_waste;
@@ -138,10 +125,8 @@ export class DashboardComponent implements OnInit {
     this.solarc = this.solar;
     this.windc = this.wind;
   }
-
-
+  
   ngOnInit() {  
-    console.log(this.biomassLength);
        
   }
 
